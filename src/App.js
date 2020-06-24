@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route} from 'react-router-dom';
+import { BrowserRouter as Router} from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
 
@@ -44,8 +44,10 @@ class App extends Component{
     Send = async (e) =>{
         e.preventDefault();
         await this.Saved();
+        console.log(document.getElementById('Submit').value);
         if(document.getElementById('Submit').value === 'Submit'){
             fetch(process.env.REACT_APP_API_URL,{
+                mode: 'cors',
                 method: 'POST',
                 body: JSON.stringify(this.state.producto),
                 headers:{
@@ -62,6 +64,7 @@ class App extends Component{
             const id = document.getElementById('id').innerHTML; 
             console.log(id);
             fetch(`${process.env.REACT_APP_API_URL}${id}`,{
+                mode: 'cors',
                 method: 'PUT',
                 body: JSON.stringify(this.state.producto),
                 headers:{
@@ -79,13 +82,17 @@ class App extends Component{
     }
 
     deleteTask = async (id)=>{
-        fetch(`${process.env.REACT_APP_API_URL}${id}`,{
+        /*fetch(`${process.env.REACT_APP_API_URL}${id}`,{
+            mode: 'cors',
             method: 'DELETE'
         })
         .then(res=>{
          console.log(res)
          })
-        .catch(err=> console.log(err))
+        .catch(err=> console.log(err))*/
+        console.log(`${process.env.REACT_APP_API_URL}${id}`);
+        const response = await axios.delete(`${process.env.REACT_APP_API_URL}${id}`)
+        console.log(response);
         await this.getUser();
     }
 
@@ -118,7 +125,7 @@ class App extends Component{
             <div className="productos row">
                 <div>
                      <form id="form" onSubmit={this.Send} className="card">
-                        <h3 id="titulo">Añade Productos</h3>
+                        <h3 id="titulo">Anade Productos</h3>
                         <div className="form-row">
                             <div className="form-group col-8">
                                 <label htmlFor="name">Name </label>
