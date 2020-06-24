@@ -58,7 +58,7 @@ class App extends Component{
         else if(document.getElementById('Submit').value === 'Update'){
             const id = document.getElementById('id').innerHTML; 
             console.log(id);
-            fetch(`${REACT_APP_API_URL_ID}/${id}`,{
+            fetch(`${process.env.REACT_APP_API_URL}/${id}`,{
                 method: 'PUT',
                 body: JSON.stringify(this.state.producto),
                 headers:{
@@ -73,7 +73,7 @@ class App extends Component{
     }
 
     deleteTask = async (id)=>{
-        fetch(`${REACT_APP_API_URL_ID}/${id}`,{
+        fetch(`${process.env.REACT_APP_API_URL}/${id}`,{
             method: 'DELETE'
         })
         .then(res=> console.log(res))
