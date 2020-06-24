@@ -18,7 +18,7 @@ class App extends Component{
         this.getUser();
     }
     getUser = async ()=>{
-        const response = await axios.get('http://localhost:5000/api/task');
+        const response = await axios.get(process.env.REACT_APP_API_URL);
         this.setState({tasks: response.data});
     }
     Saved = ()=>{
@@ -45,7 +45,7 @@ class App extends Component{
         e.preventDefault();
         await this.Saved();
         if(document.getElementById('Submit').value === 'Submit'){
-            fetch('http://localhost:5000/api/task',{
+            fetch(process.env.REACT_APP_API_URL,{
                 method: 'POST',
                 body: JSON.stringify(this.state.producto),
                 headers:{
@@ -58,7 +58,7 @@ class App extends Component{
         else if(document.getElementById('Submit').value === 'Update'){
             const id = document.getElementById('id').innerHTML; 
             console.log(id);
-            fetch(`http://localhost:5000/api/task/${id}`,{
+            fetch(`${REACT_APP_API_URL_ID}/${id}`,{
                 method: 'PUT',
                 body: JSON.stringify(this.state.producto),
                 headers:{
@@ -73,7 +73,7 @@ class App extends Component{
     }
 
     deleteTask = async (id)=>{
-        fetch(`http://localhost:5000/api/task/${id}`,{
+        fetch(`${REACT_APP_API_URL_ID}/${id}`,{
             method: 'DELETE'
         })
         .then(res=> console.log(res))
