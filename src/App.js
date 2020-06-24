@@ -54,9 +54,9 @@ class App extends Component{
             })
             .then(res=>{
              console.log(res)
-             this.getUser();
              })
             .catch(err=> console.log(err))
+            await this.getUser();
         }
         else if(document.getElementById('Submit').value === 'Update'){
             const id = document.getElementById('id').innerHTML; 
@@ -70,9 +70,9 @@ class App extends Component{
             })
             .then(res=>{
              console.log(res)
-             this.getUser();
              })
             .catch(err=> console.log(err))
+            await this.getUser();
         }
         this.Cancel();
         this.getUser();
@@ -83,12 +83,10 @@ class App extends Component{
             method: 'DELETE'
         })
         .then(res=>{
-
          console.log(res)
-         this.getUser();
          })
         .catch(err=> console.log(err))
-        
+        await this.getUser();
     }
 
     editTask = async (id)=>{
