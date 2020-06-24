@@ -52,7 +52,10 @@ class App extends Component{
                     'Content-Type': 'application/json'
                 }
             })
-            .then(res=> console.log(res))
+            .then(res=>{
+             console.log(res)
+             this.getUser();
+             })
             .catch(err=> console.log(err))
         }
         else if(document.getElementById('Submit').value === 'Update'){
@@ -65,7 +68,10 @@ class App extends Component{
                     'Content-Type': 'application/json'
                 }
             })
-            .then(res=> console.log(res))
+            .then(res=>{
+             console.log(res)
+             this.getUser();
+             })
             .catch(err=> console.log(err))
         }
         this.Cancel();
@@ -76,9 +82,13 @@ class App extends Component{
         fetch(`${process.env.REACT_APP_API_URL}${id}`,{
             method: 'DELETE'
         })
-        .then(res=> console.log(res))
+        .then(res=>{
+
+         console.log(res)
+         this.getUser();
+         })
         .catch(err=> console.log(err))
-        this.getUser();
+        
     }
 
     editTask = async (id)=>{
