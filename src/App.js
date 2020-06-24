@@ -58,7 +58,7 @@ class App extends Component{
         else if(document.getElementById('Submit').value === 'Update'){
             const id = document.getElementById('id').innerHTML; 
             console.log(id);
-            fetch(`${process.env.REACT_APP_API_URL}/${id}`,{
+            fetch(`${process.env.REACT_APP_API_URL}${id}`,{
                 method: 'PUT',
                 body: JSON.stringify(this.state.producto),
                 headers:{
@@ -73,7 +73,7 @@ class App extends Component{
     }
 
     deleteTask = async (id)=>{
-        fetch(`${process.env.REACT_APP_API_URL}/${id}`,{
+        fetch(`${process.env.REACT_APP_API_URL}${id}`,{
             method: 'DELETE'
         })
         .then(res=> console.log(res))
@@ -82,7 +82,7 @@ class App extends Component{
     }
 
     editTask = async (id)=>{
-        const response = await axios.get('http://localhost:5000/api/task/'+id);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}${id}`);
         document.getElementById('url').value = response.data[0].url;
         document.getElementById('name').value = response.data[0].name;
         document.getElementById('price').value = response.data[0].price;
